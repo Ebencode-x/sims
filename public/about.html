@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="public-nav">
+        <div class="brand">
+            <div class="brand-mark">SI</div>
+            <div class="brand-text">SIMS
+                <small>Smart Inventory</small>
+            </div>
+        </div>
+        <div class="public-nav-links">
+            <a class="btn btn-ghost" href="index.html">Home</a>
+            <a class="btn btn-ghost" href="login.html">Log in</a>
+            <a class="btn btn-primary" href="register.html">Create Account</a>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <img src="images/lance-chang-h3pVxOIpnzk-unsplash.jpg" alt="Warehouse aisle lined with stocked shelving">
+        <div class="about-hero-inner">
+            <div class="hero-eyebrow">About the System</div>
+            <h1>A stockroom system built for how small teams actually work</h1>
+            <p>
+                SIMS started as a class project, but the problem it solves is a
+                real one: small teams tracking physical stock by hand, with no
+                shared view of what's actually on the shelf.
+            </p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-split">
+            <div>
+                <div class="about-section-header">
+                    <div class="hero-eyebrow">The Problem</div>
+                    <h2>Stock knowledge lives in one person's head</h2>
+                </div>
+                <ul class="about-list">
+                    <li>Counts are kept on paper or in a spreadsheet that only one person updates, so everyone else is guessing.</li>
+                    <li>Low stock is discovered when a customer asks for something that's already gone, not before.</li>
+                    <li>Working out how much inventory is worth means manually adding up categories by hand.</li>
+                    <li>Nothing is backed up — a lost notebook or corrupted file means starting the count over.</li>
+                </ul>
+            </div>
+            <div class="about-split-image">
+                <img src="images/centre-for-ageing-better-ZlOlRnWk8zU-unsplash.jpg" alt="Warehouse staff reviewing stock in person">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-split">
+            <div class="about-split-image">
+                <img src="images/warehouse.jpg" alt="Warehouse shelving with a stock trolley">
+            </div>
+            <div>
+                <div class="about-section-header">
+                    <div class="hero-eyebrow">Where SIMS Is Today</div>
+                    <h2>Phase 1: a shared, accurate stock record</h2>
+                </div>
+                <ul class="about-list">
+                    <li>Every product, quantity, price and category stored in one place the whole team can log into.</li>
+                    <li>Dashboard summary of total products, units in stock and total inventory value, updated the moment stock changes.</li>
+                    <li>Low-stock items flagged automatically, based on a threshold the team controls.</li>
+                    <li>Category-level reports without exporting or calculating anything by hand.</li>
+                    <li>Accounts are password-protected, with each session signed and expiring after 8 hours.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-section-header">
+            <div class="hero-eyebrow">Where We're Headed</div>
+            <h2>The roadmap beyond this class deadline</h2>
+            <p>
+                Phase 1 replaces the notebook. The phases after it remove the
+                typing — first with a scan, then with sensors that report
+                stock changes on their own, then with a system that starts
+                spotting patterns in that data.
+            </p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item is-live">
+                <div class="timeline-image is-placeholder">Phase 1</div>
+                <div class="timeline-content">
+                    <span class="roadmap-tag is-live">Live now</span>
+                    <h3>Foundation — digital stock record</h3>
+                    <p>
+                        Web-based product registry, real-time dashboard, low-stock
+                        alerts and category reports, built on the current tech stack
+                        (Node.js, Express, SQLite). This is what's running today.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-image">
+                    <img src="images/bluestonex--8Lsg7OqCBE-unsplash.jpg" alt="Handheld barcode scanner scanning a package">
+                </div>
+                <div class="timeline-content">
+                    <span class="roadmap-tag is-planned">Planned</span>
+                    <h3>Barcode &amp; QR scanning</h3>
+                    <p>
+                        Every product gets a scannable code. Adding stock or
+                        recording a sale becomes a scan instead of a manual form,
+                        cutting entry errors and the time it takes to log a batch.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-image">
+                    <img src="images/alex-knight-B0--kMa8BgU-unsplash.jpg" alt="Close-up of a small IoT sensor device">
+                </div>
+                <div class="timeline-content">
+                    <span class="roadmap-tag is-planned">Planned</span>
+                    <h3>IoT stock sensors</h3>
+                    <p>
+                        Weight or RFID sensors on shelving report quantity changes
+                        directly to SIMS as items are taken or restocked, so the
+                        dashboard reflects real stock without anyone opening the app.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-image">
+                    <img src="images/egor-litvinov-ncKxCn5SI3A-unsplash.jpg" alt="Automated, well-lit modern warehouse aisle">
+                </div>
+                <div class="timeline-content">
+                    <span class="roadmap-tag is-planned">Planned</span>
+                    <h3>AI-assisted insights</h3>
+                    <p>
+                        With enough stock history logged, SIMS can start
+                        suggesting reorder timing and flagging unusual drops in
+                        stock — patterns a manual count would never catch in time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-section-header">
+            <div class="hero-eyebrow">The Team</div>
+            <h2>Built by three students, one team account</h2>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">ER</div>
+                <h3>Ebenezer Richard</h3>
+                <p>Development Team</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">MK</div>
+                <h3>Mhoja Kalunde</h3>
+                <p>Development Team</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">DK</div>
+                <h3>David Kansola</h3>
+                <p>Development Team</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-cta">
+        <h2>See Phase 1 running for yourself</h2>
+        <p>The core system is live. Create an account and load in your own stock to try it.</p>
+        <a class="btn btn-primary" href="register.html">Get Started — it's free</a>
+    </section>
+
+    <footer class="landing-footer" id="page-footer"></footer>
+
+    <script src="js/contact.js"></script>
+    <script>
+        document.getElementById("page-footer").innerHTML = renderFooterHTML();
+    </script>
+
+</body>
+
+</html>
