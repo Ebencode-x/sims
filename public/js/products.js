@@ -41,6 +41,7 @@ function renderTable() {
 
     if (filtered.length === 0) {
         body.innerHTML = "";
+        document.getElementById("results-count").textContent = "";
         emptyWrap.innerHTML = `
             <div class="empty-state">
                 <div class="stamp stamp-rust">No Matches</div>
@@ -51,17 +52,22 @@ function renderTable() {
     }
 
     emptyWrap.innerHTML = "";
+    document.getElementById("results-count").textContent =
+        filtered.length === allProducts.length
+            ? `${filtered.length} product${filtered.length === 1 ? "" : "s"} on record`
+            : `Showing ${filtered.length} of ${allProducts.length} products`;
+
     body.innerHTML = filtered.map(p => `
         <tr>
-            <td>${escapeHtml(p.name)}</td>
-            <td class="mono">${escapeHtml(p.sku)}</td>
-            <td>${escapeHtml(p.category || "—")}</td>
-            <td class="mono">${p.quantity}</td>
-            <td class="mono">$${formatCurrency(p.price)}</td>
-            <td>${isLowStock(p)
+            <td data-label="Product">${escapeHtml(p.name)}</td>
+            <td class="mono" data-label="SKU">${escapeHtml(p.sku)}</td>
+            <td data-label="Category">${escapeHtml(p.category || "—")}</td>
+            <td class="mono" data-label="Quantity">${p.quantity}</td>
+            <td class="mono" data-label="Price">$${formatCurrency(p.price)}</td>
+            <td data-label="Status">${isLowStock(p)
                 ? `<span class="tag tag-rust">Low</span>`
                 : `<span class="tag tag-moss">Healthy</span>`}</td>
-            <td>
+            <td data-label="">
                 <div class="row-actions">
                     <button class="btn btn-ghost btn-sm" onclick="openEditModal(${p.id})">Edit</button>
                     <button class="btn btn-danger btn-sm" onclick="handleDelete(${p.id}, '${escapeHtml(p.name)}')">Delete</button>
@@ -82,11 +88,11 @@ function openEditModal(id) {
     document.getElementById("edit-price").value = product.price;
     document.getElementById("edit-category").value = product.category || "";
 
-    document.getElementById("edit-modal").style.display = "flex";
+    document.getElementById("edit-modal").classList.add("is-open");
 }
 
 function closeEditModal() {
-    document.getElementById("edit-modal").style.display = "none";
+    document.getElementById("edit-modal").classList.remove("is-open");
 }
 
 async function handleDelete(id, name) {

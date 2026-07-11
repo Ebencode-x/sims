@@ -24,13 +24,15 @@
                         <span class="mono" style="color: var(--muted); font-size: 0.85rem;">Search</span>
                         <input type="text" id="search-input" placeholder="Product name or SKU...">
                     </div>
-                    <div style="display:flex; gap:0.6rem; align-items:center;">
+                    <div class="toolbar-actions">
                         <select id="category-filter">
                             <option value="">All categories</option>
                         </select>
                         <a class="btn btn-primary" href="add-product.html">+ Add Product</a>
                     </div>
                 </div>
+
+                <div class="results-count" id="results-count"></div>
 
                 <div class="table-wrap">
                     <table>
@@ -58,8 +60,8 @@
     </div>
 
     <!-- Edit modal -->
-    <div id="edit-modal" style="display:none; position:fixed; inset:0; background:rgba(20,33,61,0.45); align-items:center; justify-content:center; z-index:50;">
-        <div class="form-card" style="width: 100%; max-width: 480px;">
+    <div id="edit-modal" class="modal-overlay">
+        <div class="form-card modal-card">
             <h2 style="font-size: 1.05rem;">Edit Product</h2>
             <form id="edit-form">
                 <input type="hidden" id="edit-id">
