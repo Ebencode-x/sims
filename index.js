@@ -47,6 +47,48 @@ db.run(`
   )
 `);
 
+// ---------- Validation helpers ----------
+
+function validateProduct(body) {
+    const errors = [];
+
+    const name = (body.name ?? "").toString().trim();
+    const sku = (body.sku ?? "").toString().trim();
+    const category = (body.category ?? "").toString().trim();
+    const quantity = Number(body.quantity);
+    const price = Number(body.price);
+
+    if (!name) {
+        errors.push("Product name is required.");
+    }
+    if (!sku) {
+        errors.push("SKU is required.");
+    }
+    if (body.quantity === undefined || body.quantity === "" || !Number.isInteger(quantity) || quantity < 0) {
+        errors.push("Quantity must be a whole number of 0 or more.");
+    }
+    if (body.price === undefined || body.price === "" || !Number.isFinite(price) || price < 0) {
+        errors.push("Price must be a number of 0 or more.");
+    }
+
+    return { errors, data: { name, sku, category, quantity, price } };
+}
+
+function validateCredentials(body) {
+    const errors = [];
+    const username = (body.username ?? "").toString().trim();
+    const password = (body.password ?? "").toString();
+
+    if (username.length < 3) {
+        errors.push("Username must be at least 3 characters.");
+    }
+    if (!password) {
+        errors.push("Password is required.");
+    }
+
+    return { errors, data: { username, password } };
+}
+
 // ---------- Auth middleware ----------
 
 function requireAuth(req, res, next) {
@@ -59,19 +101,19 @@ function requireAuth(req, res, next) {
 // ---------- Auth routes ----------
 
 app.post("/auth/register", (req, res) => {
-    const { username, password } = req.body;
+    const { errors, data } = validateCredentials(req.body);
 
-    if (!username || !password) {
-        return res.status(400).json({ error: "Username and password are required." });
+    if (data.password && data.password.length < 6) {
+        errors.push("Password must be at least 6 characters.");
     }
-    if (password.length < 6) {
-        return res.status(400).json({ error: "Password must be at least 6 characters." });
+    if (errors.length) {
+        return res.status(400).json({ error: errors.join(" ") });
     }
 
-    const passwordHash = bcrypt.hashSync(password, 10);
+    const passwordHash = bcrypt.hashSync(data.password, 10);
 
     const sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
-    db.run(sql, [username, passwordHash], function (err) {
+    db.run(sql, [data.username, passwordHash], function (err) {
         if (err) {
             if (err.message.includes("UNIQUE")) {
                 return res.status(400).json({ error: "That username is already taken." });
@@ -80,13 +122,14 @@ app.post("/auth/register", (req, res) => {
         }
 
         req.session.userId = this.lastID;
-        req.session.username = username;
-        res.json({ id: this.lastID, username });
+        req.session.username = data.username;
+        res.json({ id: this.lastID, username: data.username });
     });
 });
 
 app.post("/auth/login", (req, res) => {
-    const { username, password } = req.body;
+    const username = (req.body.username ?? "").toString().trim();
+    const password = (req.body.password ?? "").toString();
 
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required." });
@@ -122,14 +165,20 @@ app.get("/auth/me", (req, res) => {
 // ---------- Product routes (protected) ----------
 
 app.post("/products", requireAuth, (req, res) => {
-    const { name, sku, quantity, price, category } = req.body;
+    const { errors, data } = validateProduct(req.body);
+    if (errors.length) {
+        return res.status(400).json({ error: errors.join(" ") });
+    }
 
     const sql = "INSERT INTO products (name, sku, quantity, price, category) VALUES (?, ?, ?, ?, ?)";
-    db.run(sql, [name, sku, quantity, price, category], function (err) {
+    db.run(sql, [data.name, data.sku, data.quantity, data.price, data.category], function (err) {
         if (err) {
+            if (err.message.includes("UNIQUE")) {
+                return res.status(400).json({ error: "A product with this SKU already exists." });
+            }
             return res.status(400).json({ error: err.message });
         }
-        res.json({ id: this.lastID, name, sku, quantity, price, category });
+        res.json({ id: this.lastID, ...data });
     });
 });
 
@@ -143,8 +192,16 @@ app.get("/products", requireAuth, (req, res) => {
 });
 
 app.put("/products/:id", requireAuth, (req, res) => {
-    const { name, sku, quantity, price, category } = req.body;
     const { id } = req.params;
+
+    if (!Number.isInteger(Number(id))) {
+        return res.status(400).json({ error: "Invalid product id." });
+    }
+
+    const { errors, data } = validateProduct(req.body);
+    if (errors.length) {
+        return res.status(400).json({ error: errors.join(" ") });
+    }
 
     const sql = `
     UPDATE products
@@ -152,8 +209,11 @@ app.put("/products/:id", requireAuth, (req, res) => {
     WHERE id = ?
   `;
 
-    db.run(sql, [name, sku, quantity, price, category, id], function (err) {
+    db.run(sql, [data.name, data.sku, data.quantity, data.price, data.category, id], function (err) {
         if (err) {
+            if (err.message.includes("UNIQUE")) {
+                return res.status(400).json({ error: "A product with this SKU already exists." });
+            }
             return res.status(400).json({ error: err.message });
         }
 
@@ -167,6 +227,10 @@ app.put("/products/:id", requireAuth, (req, res) => {
 
 app.delete("/products/:id", requireAuth, (req, res) => {
     const { id } = req.params;
+
+    if (!Number.isInteger(Number(id))) {
+        return res.status(400).json({ error: "Invalid product id." });
+    }
 
     const sql = "DELETE FROM products WHERE id = ?";
 
