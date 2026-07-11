@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product — SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <div class="main">
+            <header class="topbar" id="topbar"></header>
+
+            <main class="content" id="page-content" data-title="Add Product" data-subtitle="Register a new item into inventory">
+
+                <div class="form-card">
+                    <form id="add-product-form">
+                        <div class="field full">
+                            <label for="name">Product Name</label>
+                            <input type="text" id="name" placeholder="e.g. Wireless Barcode Scanner" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="sku">SKU</label>
+                                <input type="text" id="sku" placeholder="e.g. WBS-1042" required>
+                            </div>
+                            <div class="field">
+                                <label for="category">Category</label>
+                                <input type="text" id="category" placeholder="e.g. Electronics">
+                            </div>
+                            <div class="field">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" id="quantity" placeholder="0" min="0" required>
+                            </div>
+                            <div class="field">
+                                <label for="price">Price</label>
+                                <input type="number" id="price" placeholder="0.00" step="0.01" min="0" required>
+                            </div>
+                        </div>
+
+                        <div id="form-message" style="margin-bottom: 1rem; font-size: 0.85rem;"></div>
+
+                        <div style="display:flex; gap:0.6rem;">
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                            <a href="products.html" class="btn btn-ghost">View Inventory</a>
+                        </div>
+                    </form>
+                </div>
+
+            </main>
+
+            <footer class="page-footer" id="page-footer"></footer>
+        </div>
+    </div>
+
+    <script src="js/components.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/add-product.js"></script>
+</body>
+
+</html>

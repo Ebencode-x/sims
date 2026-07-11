@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <div class="main">
+            <header class="topbar" id="topbar"></header>
+
+            <main class="content" id="page-content" data-title="Dashboard" data-subtitle="Stock health at a glance">
+
+                <div class="stat-grid" id="stat-grid">
+                    <!-- stat cards injected by dashboard.js -->
+                </div>
+
+                <div class="card" style="padding: 1.2rem 1.4rem; margin-bottom: 1.6rem;">
+                    <h2 style="font-size: 1rem; margin-bottom: 0.9rem;">Low Stock Alerts</h2>
+                    <div id="low-stock-section"></div>
+                </div>
+
+                <div class="card" style="padding: 1.2rem 1.4rem;">
+                    <h2 style="font-size: 1rem; margin-bottom: 0.9rem;">Recently Added</h2>
+                    <div id="recent-section"></div>
+                </div>
+
+            </main>
+
+            <footer class="page-footer" id="page-footer"></footer>
+        </div>
+    </div>
+
+    <script src="js/components.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
