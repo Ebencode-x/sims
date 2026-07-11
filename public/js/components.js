@@ -67,7 +67,7 @@ function renderFooter() {
     const footer = document.getElementById("page-footer");
     if (!footer) return;
 
-    footer.innerHTML = `Smart Inventory Management System &middot; built on Node.js, Express &amp; SQLite`;
+    footer.innerHTML = renderFooterHTML();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

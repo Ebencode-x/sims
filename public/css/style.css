@@ -572,6 +572,14 @@ input:focus, select:focus, .nav-link:focus-visible, .btn:focus-visible {
     .form-grid {
         grid-template-columns: 1fr;
     }
+
+    .feature-grid {
+        flex-direction: column;
+    }
+
+    .feature-arrow {
+        display: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -685,23 +693,55 @@ input:focus, select:focus, .nav-link:focus-visible, .btn:focus-visible {
 .feature-grid {
     max-width: 1180px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.6rem;
+    display: flex;
+    align-items: stretch;
+    gap: 0.6rem;
 }
 
-.feature-card .nav-icon {
+.feature-card {
+    flex: 1;
+    padding: 1.4rem 1.4rem 1.6rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(20, 33, 61, 0.1);
+}
+
+.feature-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 7px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
     background: var(--paper);
-    font-family: var(--font-data);
-    font-size: 0.78rem;
     color: var(--steel);
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.feature-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.feature-card:nth-child(3) .feature-icon { color: var(--rust); }
+.feature-card:nth-child(5) .feature-icon { color: var(--moss); }
+
+.feature-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--line);
+    width: 28px;
+    flex-shrink: 0;
+    padding-top: 1.4rem;
+}
+
+.feature-arrow svg {
+    width: 20px;
+    height: 20px;
 }
 
 .feature-card h3 {
@@ -825,4 +865,92 @@ input:focus, select:focus, .nav-link:focus-visible, .btn:focus-visible {
     .auth-visual {
         display: none;
     }
+}
+
+/* =========================================================
+   Footer social row + floating WhatsApp bubble
+   ========================================================= */
+
+.page-footer, .landing-footer {
+    background: var(--ink);
+    padding: 0;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.6rem 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #b7c0dc;
+    font-family: var(--font-data);
+    font-size: 0.74rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 20px;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.social-link:hover {
+    color: #ffffff;
+    background: var(--ink-soft);
+}
+
+.social-link svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.social-link.icon-only {
+    padding: 0.5rem;
+}
+
+.social-link.icon-only span {
+    display: none;
+}
+
+.footer-copy {
+    font-family: var(--font-data);
+    font-size: 0.7rem;
+    color: #6b76a0;
+}
+
+.whatsapp-bubble {
+    position: fixed;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #25d366;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);
+    z-index: 40;
+    transition: transform 0.15s ease;
+}
+
+.whatsapp-bubble svg {
+    width: 26px;
+    height: 26px;
+}
+
+.whatsapp-bubble:hover {
+    transform: scale(1.08);
 }

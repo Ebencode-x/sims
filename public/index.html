@@ -48,20 +48,36 @@
 
     <section class="feature-strip">
         <div class="feature-grid">
-            <div class="feature-card">
-                <div class="nav-icon">01</div>
+            <div class="card feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+                </div>
                 <h3>Track stock in real time</h3>
                 <p>Every product, quantity and price lives in one place —
                     update it and the whole team sees it instantly.</p>
             </div>
-            <div class="feature-card">
-                <div class="nav-icon">02</div>
+
+            <div class="feature-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </div>
+
+            <div class="card feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+                </div>
                 <h3>Catch low stock early</h3>
                 <p>Products below your threshold are flagged automatically
                     on the dashboard, before they run out.</p>
             </div>
-            <div class="feature-card">
-                <div class="nav-icon">03</div>
+
+            <div class="feature-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </div>
+
+            <div class="card feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+                </div>
                 <h3>Generate reports instantly</h3>
                 <p>See stock value broken down by category, without
                     exporting a single spreadsheet.</p>
@@ -69,9 +85,12 @@
         </div>
     </section>
 
-    <footer class="landing-footer">
-        SIMS &middot; Smart Inventory Management System &middot; IT 8114 Software Engineering Final Project
-    </footer>
+    <footer class="landing-footer" id="page-footer"></footer>
+
+    <script src="js/contact.js"></script>
+    <script>
+        document.getElementById("page-footer").innerHTML = renderFooterHTML();
+    </script>
 
 </body>
 

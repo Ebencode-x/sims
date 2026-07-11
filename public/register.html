@@ -53,6 +53,12 @@
         </div>
     </div>
 
+    <footer class="landing-footer" id="page-footer"></footer>
+
+    <script src="js/contact.js"></script>
+    <script>
+        document.getElementById("page-footer").innerHTML = renderFooterHTML();
+    </script>
     <script src="js/api.js"></script>
     <script>
         document.getElementById("register-form").addEventListener("submit", async (e) => {
