@@ -15,26 +15,27 @@ async function loadDashboard() {
     const totalUnits = products.reduce((sum, p) => sum + Number(p.quantity || 0), 0);
     const totalValue = products.reduce((sum, p) => sum + Number(p.quantity || 0) * Number(p.price || 0), 0);
     const lowStockItems = products.filter(isLowStock);
+    const hasData = totalProducts > 0;
 
     statGrid.innerHTML = `
         <div class="stat-card">
             <div class="stat-label">Total Products</div>
-            <div class="stat-value mono">${totalProducts}</div>
+            <div class="stat-value mono">${hasData ? totalProducts : "—"}</div>
             <div class="stat-hint">distinct SKUs registered</div>
         </div>
         <div class="stat-card moss">
             <div class="stat-label">Units In Stock</div>
-            <div class="stat-value mono">${totalUnits}</div>
+            <div class="stat-value mono">${hasData ? totalUnits : "—"}</div>
             <div class="stat-hint">across all products</div>
         </div>
         <div class="stat-card amber">
             <div class="stat-label">Inventory Value</div>
-            <div class="stat-value mono">$${formatCurrency(totalValue)}</div>
+            <div class="stat-value mono">${hasData ? "Tsh " + formatCurrency(totalValue) : "—"}</div>
             <div class="stat-hint">quantity &times; price</div>
         </div>
         <div class="stat-card rust">
             <div class="stat-label">Low Stock Alerts</div>
-            <div class="stat-value mono">${lowStockItems.length}</div>
+            <div class="stat-value mono">${hasData ? lowStockItems.length : "—"}</div>
             <div class="stat-hint">below ${LOW_STOCK_THRESHOLD} units</div>
         </div>
     `;
@@ -88,7 +89,7 @@ async function loadDashboard() {
                                 <td>${escapeHtml(p.name)}</td>
                                 <td class="mono">${escapeHtml(p.sku)}</td>
                                 <td class="mono">${p.quantity}</td>
-                                <td class="mono">$${formatCurrency(p.price)}</td>
+                                <td class="mono">Tsh ${formatCurrency(p.price)}</td>
                                 <td>${isLowStock(p)
                                     ? `<span class="tag tag-rust">Low</span>`
                                     : `<span class="tag tag-moss">Healthy</span>`}</td>

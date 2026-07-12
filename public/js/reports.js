@@ -14,19 +14,20 @@ async function loadReports() {
     const totalValue = products.reduce((sum, p) => sum + Number(p.quantity || 0) * Number(p.price || 0), 0);
     const categoryCount = new Set(products.map(p => p.category).filter(Boolean)).size;
     const lowStockItems = products.filter(isLowStock);
+    const hasData = products.length > 0;
 
     statGrid.innerHTML = `
         <div class="stat-card amber">
             <div class="stat-label">Total Inventory Value</div>
-            <div class="stat-value mono">$${formatCurrency(totalValue)}</div>
+            <div class="stat-value mono">${hasData ? "Tsh " + formatCurrency(totalValue) : "—"}</div>
         </div>
         <div class="stat-card">
             <div class="stat-label">Categories Tracked</div>
-            <div class="stat-value mono">${categoryCount}</div>
+            <div class="stat-value mono">${hasData ? categoryCount : "—"}</div>
         </div>
         <div class="stat-card rust">
             <div class="stat-label">Items Below Threshold</div>
-            <div class="stat-value mono">${lowStockItems.length}</div>
+            <div class="stat-value mono">${hasData ? lowStockItems.length : "—"}</div>
         </div>
     `;
 
@@ -50,7 +51,7 @@ async function loadReports() {
                 <div class="bar-track">
                     <div class="bar-fill" style="width: ${(value / maxValue) * 100}%;"></div>
                 </div>
-                <div class="mono" style="text-align:right;">$${formatCurrency(value)}</div>
+                <div class="mono" style="text-align:right;">Tsh ${formatCurrency(value)}</div>
             </div>
         `).join("");
     }

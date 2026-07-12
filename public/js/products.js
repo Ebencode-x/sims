@@ -63,7 +63,7 @@ function renderTable() {
             <td class="mono" data-label="SKU">${escapeHtml(p.sku)}</td>
             <td data-label="Category">${escapeHtml(p.category || "—")}</td>
             <td class="mono" data-label="Quantity">${p.quantity}</td>
-            <td class="mono" data-label="Price">$${formatCurrency(p.price)}</td>
+            <td class="mono" data-label="Price">Tsh ${formatCurrency(p.price)}</td>
             <td data-label="Status">${isLowStock(p)
                 ? `<span class="tag tag-rust">Low</span>`
                 : `<span class="tag tag-moss">Healthy</span>`}</td>

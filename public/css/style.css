@@ -1580,3 +1580,120 @@ input:focus, select:focus, .nav-link:focus-visible, .btn:focus-visible {
 .whatsapp-bubble:hover {
     transform: scale(1.08);
 }
+
+/* ---------- WhatsApp bubble ---------- */
+
+.whatsapp-bubble {
+    position: fixed;
+    bottom: 1.6rem;
+    right: 1.6rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    transition: transform 0.15s ease;
+}
+
+.whatsapp-bubble:hover {
+    transform: scale(1.08);
+}
+
+/* ---------- Footer social icons ---------- */
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.8rem 0;
+}
+
+.icon-link {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    color: var(--ink);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.icon-link:hover {
+    background: var(--ink);
+    color: #fff;
+}
+
+/* ---------- Hamburger menu (mobile) ---------- */
+
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+}
+
+@media (max-width: 700px) {
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .sidebar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80%;
+        max-width: 280px;
+        height: 100vh;
+        flex-direction: column;
+        z-index: 200;
+        overflow-y: auto;
+    }
+
+    .sidebar.is-open {
+        display: flex;
+    }
+
+    .nav-group {
+        flex-direction: column;
+    }
+
+    .nav-label {
+        display: block;
+    }
+
+    .sidebar-footer {
+        display: block;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 33, 61, 0.45);
+        z-index: 150;
+    }
+
+    .sidebar-overlay.is-open {
+        display: block;
+    }
+}

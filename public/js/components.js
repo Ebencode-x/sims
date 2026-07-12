@@ -55,12 +55,36 @@ function renderTopbar() {
     const subtitle = content.dataset.subtitle || "";
 
     topbar.innerHTML = `
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
         <div>
             <h1>${title}</h1>
             ${subtitle ? `<div class="topbar-subtitle">${subtitle}</div>` : ""}
         </div>
         <div class="topbar-right" id="topbar-actions"></div>
     `;
+
+    const hamburger = document.getElementById("hamburger-btn");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    hamburger.addEventListener("click", () => {
+        sidebar.classList.toggle("is-open");
+        overlay.classList.toggle("is-open");
+    });
+}
+
+function ensureSidebarOverlay() {
+    if (document.getElementById("sidebar-overlay")) return;
+    const overlay = document.createElement("div");
+    overlay.id = "sidebar-overlay";
+    overlay.className = "sidebar-overlay";
+    overlay.addEventListener("click", () => {
+        document.getElementById("sidebar").classList.remove("is-open");
+        overlay.classList.remove("is-open");
+    });
+    document.body.appendChild(overlay);
 }
 
 function renderFooter() {
@@ -71,7 +95,15 @@ function renderFooter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    ensureSidebarOverlay();
     renderSidebar();
     renderTopbar();
     renderFooter();
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            document.getElementById("sidebar").classList.remove("is-open");
+            document.getElementById("sidebar-overlay").classList.remove("is-open");
+        });
+    });
 });
