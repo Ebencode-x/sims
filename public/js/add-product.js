@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("add-product-form");
     const message = document.getElementById("form-message");
+    const submitBtn = document.getElementById("submit-btn");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -13,14 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
             category: document.getElementById("category").value
         };
 
+        message.className = "form-message";
+        message.textContent = "";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Saving...";
+
         try {
             await createProduct(product);
-            message.style.color = "var(--moss)";
+            message.className = "form-message is-success";
             message.textContent = `"${product.name}" was added to inventory.`;
             form.reset();
         } catch (err) {
-            message.style.color = "var(--rust)";
+            message.className = "form-message is-error";
             message.textContent = err.message;
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Save Product";
         }
     });
 });
